@@ -51,7 +51,6 @@ grant select (id, todo) on api.todos to anonymous;
 grant select, insert, update, delete 
 on api.clients, api.projects, api.tasks, api.comments
 to webuser;
-
 -- step 06: row level security
 set search_path = data, public;
 
@@ -83,3 +82,9 @@ grant select, insert, update, delete on task_comment to api;
 create policy access_own_rows on task_comment to api
 using ( request.user_role() = 'webuser' and request.user_id() = user_id );
 
+-- step 08: input validation 
+grant usage on sequence data.client_id_seq to webuser;
+grant usage on sequence data.project_id_seq to webuser;
+grant usage on sequence data.task_id_seq to webuser;
+grant usage on sequence data.task_comment_id_seq to webuser;
+grant usage on sequence data.project_comment_id_seq to webuser;
