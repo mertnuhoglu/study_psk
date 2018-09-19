@@ -46,3 +46,8 @@ grant select, insert, update, delete on api.todos to webuser;
 -- anonymous users can only request specific columns from this view
 grant select (id, todo) on api.todos to anonymous;
 -------------------------------------------------------------------------------
+
+-- step 05: 
+grant select, insert, update, delete 
+on api.clients, api.projects, api.tasks, api.comments
+to webuser;
