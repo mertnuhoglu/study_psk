@@ -88,3 +88,8 @@ grant usage on sequence data.project_id_seq to webuser;
 grant usage on sequence data.task_id_seq to webuser;
 grant usage on sequence data.task_comment_id_seq to webuser;
 grant usage on sequence data.project_comment_id_seq to webuser;
+
+-- step 11
+grant select, insert, update, delete 
+on api.task_comments
+to webuser;

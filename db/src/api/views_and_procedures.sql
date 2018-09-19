@@ -26,3 +26,10 @@ alter view comments owner to api;
 create trigger comments_mutation
 instead of insert or update or delete on comments
 for each row execute procedure util.mutation_comments_trigger();
+
+-- step 11
+create or replace view task_comments as
+select id, body, 'task'::text as parent_type, task_id as parent_id,
+  null as project_id, task_id, created_on, updated_on
+from data.task_comment;
+alter view task_comments owner to api;
