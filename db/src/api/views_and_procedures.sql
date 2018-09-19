@@ -16,9 +16,13 @@ union
 select id, body, 'task'::text as parent_type, task_id as parent_id,
   null as project_id, task_id, created_on, updated_on
 from data.task_comment;
-
 -- step 06: row level security
 alter view clients owner to api;
 alter view projects owner to api;
 alter view tasks owner to api;
 alter view comments owner to api;
+
+-- step 09
+create trigger comments_mutation
+instead of insert or update or delete on comments
+for each row execute procedure util.mutation_comments_trigger();

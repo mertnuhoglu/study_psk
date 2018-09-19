@@ -25,6 +25,8 @@ begin;
 \ir libs/request/schema.sql
 -- functions for sending messages to RabbitMQ entities
 \ir libs/rabbitmq/schema.sql
+-- step 09
+\ir libs/util/schema.sql
 
 -- save app settings
 select settings.set('jwt_secret', :quoted_jwt_secret);
@@ -53,3 +55,4 @@ select settings.set('auth.default-role', 'webuser');
 
 commit;
 \echo # ==========================================
+
