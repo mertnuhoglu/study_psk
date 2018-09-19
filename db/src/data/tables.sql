@@ -1,8 +1,8 @@
-create table client (
+create table client ( 
   id           serial primary key,
   name         text not null,
   address      text,
-  user_id      int not null references "user"(id),
+  user_id      int not null references "user"(id) default request.user_id(),
   created_on   timestamptz not null default now(),
   updated_on   timestamptz
 );
@@ -12,7 +12,7 @@ create table project (
   id           serial primary key,
   name         text not null,
   client_id    int not null references client(id),
-  user_id      int not null references "user"(id),
+  user_id      int not null references "user"(id) default request.user_id(),
   created_on   timestamptz not null default now(),
   updated_on   timestamptz
 );
@@ -24,7 +24,7 @@ create table task (
   name         text not null,
   completed    bool not null default false,
   project_id   int not null references project(id),
-  user_id      int not null references "user"(id),
+  user_id      int not null references "user"(id) default request.user_id(),
   created_on   timestamptz not null default now(),
   updated_on   timestamptz
 );
@@ -35,7 +35,7 @@ create table project_comment (
   id           serial primary key,
   body         text not null,
   project_id   int not null references project(id),
-  user_id      int not null references "user"(id),
+  user_id      int not null references "user"(id) default request.user_id(),
   created_on   timestamptz not null default now(),
   updated_on   timestamptz
 );
@@ -46,7 +46,7 @@ create table task_comment (
   id           serial primary key,
   body         text not null,
   task_id      int not null references task(id),
-  user_id      int not null references "user"(id),
+  user_id      int not null references "user"(id) default request.user_id(),
   created_on   timestamptz not null default now(),
   updated_on   timestamptz
 );

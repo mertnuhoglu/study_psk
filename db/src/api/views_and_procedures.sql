@@ -16,3 +16,9 @@ union
 select id, body, 'task'::text as parent_type, task_id as parent_id,
   null as project_id, task_id, created_on, updated_on
 from data.task_comment;
+
+-- step 06: row level security
+alter view clients owner to api;
+alter view projects owner to api;
+alter view tasks owner to api;
+alter view comments owner to api;
